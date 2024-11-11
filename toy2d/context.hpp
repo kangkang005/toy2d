@@ -1,31 +1,31 @@
 #pragma once
 
+#include "tool.hpp"
 #include "vulkan/vulkan.hpp"
-#include <memory>
 #include <cassert>
 #include <iostream>
-#include "tool.hpp"
+#include <memory>
 
 namespace toy2d {
 
 class Context final {
 public:
-    static void Init();
-    static void Quit();
+  static void Init();
+  static void Quit();
 
-    static Context& GetInstance() {
-        assert(instance_);
-        return *instance_;
-    }
+  static Context &GetInstance() {
+    assert(instance_);
+    return *instance_;
+  }
 
-    ~Context();
+  ~Context();
 
-    vk::Instance instance;
+  vk::Instance instance;
 
 private:
-    static std::unique_ptr<Context> instance_;
+  static std::unique_ptr<Context> instance_;
 
-    Context();
+  Context();
 };
 
-}
+} // namespace toy2d

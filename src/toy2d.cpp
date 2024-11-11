@@ -2,13 +2,8 @@
 
 namespace toy2d {
 
+void Init() { Context::Init(); }
 
-void Init() {
-    Context::Init();
-}
+void Quit() { Context::Quit(); }
 
-void Quit() {
-    Context::Quit();
-}
-
-}
+} // namespace toy2d
