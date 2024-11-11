@@ -1,4 +1,5 @@
 #include "toy2d/context.hpp"
+#include <iostream>
 #include <vector>
 #include <vulkan/vulkan_core.h>
 
@@ -58,6 +59,11 @@ void Context::pickupPhyiscalDevice() {
 
   std::cout << "pick up physical device :" << std::endl;
   std::cout << "\t" << phyDevice.getProperties().deviceName << std::endl;
+  std::cout << "physical device support extensions:" << std::endl;
+  auto extensions = phyDevice.enumerateDeviceExtensionProperties();
+  for (auto &extension : extensions) {
+    std::cout << "\t" << extension.extensionName << std::endl;
+  }
 }
 
 void Context::createDevice() {
