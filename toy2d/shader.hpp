@@ -1,31 +1,31 @@
 #pragma once
 
 #include "vulkan/vulkan.hpp"
+#include <memory>
 
 namespace toy2d {
 
 class Shader final {
 public:
-    static void Init(const std::string& vertexSource, const std::string& fragSource);
-    static void Quit();
+  static void Init(const std::string &vertexSource,
+                   const std::string &fragSource);
+  static void Quit();
 
-    static Shader& GetInstance() {
-        return *instance_;
-    }
+  static Shader &GetInstance() { return *instance_; }
 
-    vk::ShaderModule vertexModule;
-    vk::ShaderModule fragmentModule;
+  vk::ShaderModule vertexModule;
+  vk::ShaderModule fragmentModule;
 
-    ~Shader();
+  ~Shader();
 
-    std::vector<vk::PipelineShaderStageCreateInfo> GetStage();
+  std::vector<vk::PipelineShaderStageCreateInfo> GetStage();
 
 private:
-    static std::unique_ptr<Shader> instance_;
-    std::vector<vk::PipelineShaderStageCreateInfo> stage_;
+  static std::unique_ptr<Shader> instance_;
+  std::vector<vk::PipelineShaderStageCreateInfo> stage_;
 
-    Shader(const std::string& vertexSource, const std::string& fragSource);
-    void initStage();
+  Shader(const std::string &vertexSource, const std::string &fragSource);
+  void initStage();
 };
 
-}
+} // namespace toy2d
