@@ -1,29 +1,30 @@
 #pragma once
 
-#include <iostream>
 #include "vulkan/vulkan.hpp"
+#include <iostream>
+#include <limits>
 
 namespace toy2d {
 
 class Renderer final {
 public:
-    Renderer();
-    ~Renderer();
+  Renderer();
+  ~Renderer();
 
-    void Render();
+  void Render();
 
 private:
-    vk::CommandPool cmdPool_;
-    vk::CommandBuffer cmdBuf_;
+  vk::CommandPool cmdPool_;
+  vk::CommandBuffer cmdBuf_;
 
-    vk::Semaphore imageAvaliable_;
-    vk::Semaphore imageDrawFinish_;
-    vk::Fence cmdAvaliableFence_;
+  vk::Semaphore imageAvaliable_;
+  vk::Semaphore imageDrawFinish_;
+  vk::Fence cmdAvaliableFence_;
 
-    void initCmdPool();
-    void allocCmdBuf();
-    void createSems();
-    void createFence();
+  void initCmdPool();
+  void allocCmdBuf();
+  void createSems();
+  void createFence();
 };
 
-}
+} // namespace toy2d
