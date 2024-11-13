@@ -54,8 +54,14 @@ void Context::printPhyiscalDevices() {
   for (auto &device : devices) {
     auto property = device.getProperties();
     auto deviceType = property.deviceType;
-    std::cout << "\t" << property.deviceName << " | " << property.apiVersion
-              << " | ";
+    // uint32 to variant.major.minor.patch
+    uint32_t api_version_variant = VK_API_VERSION_VARIANT(property.apiVersion);
+    uint32_t api_version_major = VK_API_VERSION_MAJOR(property.apiVersion);
+    uint32_t api_version_minor = VK_API_VERSION_MINOR(property.apiVersion);
+    uint32_t api_version_patch = VK_API_VERSION_PATCH(property.apiVersion);
+    std::cout << "\t" << property.deviceName << " | " << api_version_variant
+              << "." << api_version_major << "." << api_version_minor << "."
+              << api_version_patch << " | ";
     if (deviceType == vk::PhysicalDeviceType::eCpu) {
       std::cout << "CPU";
     } else if (deviceType == vk::PhysicalDeviceType::eOther) {
