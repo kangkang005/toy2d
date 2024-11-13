@@ -1,7 +1,9 @@
 #include "toy2d/context.hpp"
 #include <iostream>
+#include <iterator>
 #include <vector>
 #include <vulkan/vulkan_core.h>
+#include <vulkan/vulkan_enums.hpp>
 
 namespace toy2d {
 
@@ -47,9 +49,25 @@ void Context::createInstance() {
 void Context::printPhyiscalDevices() {
   auto devices = instance.enumeratePhysicalDevices();
 
-  std::cout << "physical devices :" << std::endl;
+  std::cout << "physical devices | vulkan apiVersion | device type :"
+            << std::endl;
   for (auto &device : devices) {
-    std::cout << "\t" << device.getProperties().deviceName << std::endl;
+    auto property = device.getProperties();
+    auto deviceType = property.deviceType;
+    std::cout << "\t" << property.deviceName << " | " << property.apiVersion
+              << " | ";
+    if (deviceType == vk::PhysicalDeviceType::eCpu) {
+      std::cout << "CPU";
+    } else if (deviceType == vk::PhysicalDeviceType::eOther) {
+      std::cout << "Other";
+    } else if (deviceType == vk::PhysicalDeviceType::eDiscreteGpu) {
+      std::cout << "Discrete Gpu";
+    } else if (deviceType == vk::PhysicalDeviceType::eVirtualGpu) {
+      std::cout << "Virtual Gpu";
+    } else if (deviceType == vk::PhysicalDeviceType::eIntegratedGpu) {
+      std::cout << "Integrated Gpu";
+    }
+    std::cout << std::endl;
   }
 }
 
