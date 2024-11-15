@@ -51,6 +51,7 @@ private:
 
   Context(const std::vector<const char *> &extensions, CreateSurfaceFunc func);
 
+  void printInstanceExtensions(const std::vector<const char *> &extensions);
   void createInstance(const std::vector<const char *> &extensions);
   void pickupPhyiscalDevice();
   void createDevice();

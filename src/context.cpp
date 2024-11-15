@@ -15,6 +15,7 @@ void Context::Quit() { instance_.reset(); }
 
 Context::Context(const std::vector<const char *> &extensions,
                  CreateSurfaceFunc func) {
+  printInstanceExtensions(extensions);
   createInstance(extensions);
   pickupPhyiscalDevice();
   surface = func(instance);
@@ -27,6 +28,32 @@ Context::~Context() {
   instance.destroySurfaceKHR(surface);
   device.destroy();
   instance.destroy();
+}
+
+void Context::printInstanceExtensions(
+    const std::vector<const char *> &extensions) {
+  auto instanceExtensions = vk::enumerateInstanceExtensionProperties();
+  std::cout << "Instance Extensions :" << std::endl;
+  for (const auto &extension : instanceExtensions) {
+    std::cout << "\t" << extension.extensionName << std::endl;
+  }
+  std::cout << "Surface Extensions :" << std::endl;
+  for (const auto &extension : extensions) {
+    std::cout << "\t" << extension << std::endl;
+  }
+  bool isSupported = false;
+  for (const auto &extension : extensions) {
+    for (int i = 0; i < instanceExtensions.size(); i++) {
+      if (strcmp(extension, instanceExtensions.at(i).extensionName)) {
+        isSupported = true;
+        break;
+      }
+      isSupported = false;
+    }
+    if (!isSupported) {
+      std::cout << "Not Supported Extension : " << extension << std::endl;
+    }
+  }
 }
 
 void Context::createInstance(const std::vector<const char *> &extensions) {

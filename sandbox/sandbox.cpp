@@ -25,12 +25,6 @@ int main(int argc, char **argv) {
   std::vector<const char *> extensions(count);
   SDL_Vulkan_GetInstanceExtensions(window, &count, extensions.data());
 
-  // print supported surface extensions
-  std::cout << "Surface extensions:" << std::endl;
-  for (const auto &extension : extensions) {
-    std::cout << "\t" << extension << std::endl;
-  }
-
   // hide surface API, library not relate to platform
   toy2d::Init(
       extensions,
