@@ -49,31 +49,30 @@ void Context::createInstance() {
 void Context::printPhyiscalDevices() {
   auto devices = instance.enumeratePhysicalDevices();
 
-  std::cout << "physical devices | vulkan apiVersion | device type :"
-            << std::endl;
+  std::cout
+      << "physical devices | vulkan apiVersion | queue family | device type :"
+      << std::endl;
   for (auto &device : devices) {
     auto property = device.getProperties();
-    auto deviceType = property.deviceType;
-    // uint32 to variant.major.minor.patch
+    const char *deviceType =
+        property.deviceType == vk::PhysicalDeviceType::eCpu ? "CPU"
+        : property.deviceType == vk::PhysicalDeviceType::eDiscreteGpu
+            ? "Discrete GPU"
+        : property.deviceType == vk::PhysicalDeviceType::eIntegratedGpu
+            ? "Integrated GPU"
+        : property.deviceType == vk::PhysicalDeviceType::eVirtualGpu
+            ? "Virtual GPU"
+            : "Other";
+    auto queueCount = device.getQueueFamilyProperties().size();
+    // uint32 to variant.major.minor.patch version
     uint32_t api_version_variant = VK_API_VERSION_VARIANT(property.apiVersion);
     uint32_t api_version_major = VK_API_VERSION_MAJOR(property.apiVersion);
     uint32_t api_version_minor = VK_API_VERSION_MINOR(property.apiVersion);
     uint32_t api_version_patch = VK_API_VERSION_PATCH(property.apiVersion);
     std::cout << "\t" << property.deviceName << " | " << api_version_variant
               << "." << api_version_major << "." << api_version_minor << "."
-              << api_version_patch << " | ";
-    if (deviceType == vk::PhysicalDeviceType::eCpu) {
-      std::cout << "CPU";
-    } else if (deviceType == vk::PhysicalDeviceType::eOther) {
-      std::cout << "Other";
-    } else if (deviceType == vk::PhysicalDeviceType::eDiscreteGpu) {
-      std::cout << "Discrete Gpu";
-    } else if (deviceType == vk::PhysicalDeviceType::eVirtualGpu) {
-      std::cout << "Virtual Gpu";
-    } else if (deviceType == vk::PhysicalDeviceType::eIntegratedGpu) {
-      std::cout << "Integrated Gpu";
-    }
-    std::cout << std::endl;
+              << api_version_patch << " | " << queueCount << " | " << deviceType
+              << std::endl;
   }
 }
 
