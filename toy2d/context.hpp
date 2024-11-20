@@ -10,39 +10,39 @@
 namespace toy2d {
 
 class Context final {
-public:
-  static void Init();
-  static void Quit();
+  public:
+    static void Init();
+    static void Quit();
 
-  static Context &GetInstance() {
-    assert(instance_);
-    return *instance_;
-  }
+    static Context& GetInstance() {
+        assert(instance_);
+        return *instance_;
+    }
 
-  ~Context();
+    ~Context();
 
-  struct QueueFamliyIndices final {
-    std::optional<uint32_t> graphicsQueue;
-  };
+    struct QueueFamliyIndices final {
+        std::optional<uint32_t> graphicsQueue;
+    };
 
-  vk::Instance instance;
-  vk::PhysicalDevice phyDevice;
-  vk::Device device;
-  vk::Queue graphcisQueue;
-  QueueFamliyIndices queueFamilyIndices;
+    vk::Instance instance;
+    vk::PhysicalDevice phyDevice;
+    vk::Device device;
+    vk::Queue graphcisQueue;
+    QueueFamliyIndices queueFamilyIndices;
 
-private:
-  static std::unique_ptr<Context> instance_;
+  private:
+    static std::unique_ptr<Context> instance_;
 
-  Context();
+    Context();
 
-  void createInstance();
-  void printPhyiscalDevices();
-  void pickupPhyiscalDevice();
-  void createDevice();
-  void getQueues();
+    void createInstance();
+    void printPhyiscalDevices();
+    void pickupPhyiscalDevice();
+    void createDevice();
+    void getQueues();
 
-  void queryQueueFamilyIndices();
+    void queryQueueFamilyIndices();
 };
 
 } // namespace toy2d
