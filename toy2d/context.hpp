@@ -9,23 +9,23 @@
 namespace toy2d {
 
 class Context final {
-public:
-  static void Init();
-  static void Quit();
+  public:
+    static void Init();
+    static void Quit();
 
-  static Context &GetInstance() {
-    assert(instance_);
-    return *instance_;
-  }
+    static Context& GetInstance() {
+        assert(instance_);
+        return *instance_;
+    }
 
-  ~Context();
+    ~Context();
 
-  vk::Instance instance;
+    vk::Instance instance;
 
-private:
-  static std::unique_ptr<Context> instance_;
+  private:
+    static std::unique_ptr<Context> instance_;
 
-  Context();
+    Context();
 };
 
 } // namespace toy2d
