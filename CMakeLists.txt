@@ -1,9 +1,7 @@
 cmake_minimum_required(VERSION 3.15)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
-project(Toy2D
-        LANGUAGES CXX
-        DESCRIPTION "a toy 2d renderer made in vulkan")
+project(Toy2D LANGUAGES CXX DESCRIPTION "a toy 2d renderer made in vulkan")
 
 include(cmake/FindVulkan.cmake)
 include(cmake/FindSDL2.cmake)
