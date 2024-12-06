@@ -27,7 +27,7 @@ vk::CommandPool CommandManager::createCommandPool() {
     return ctx.device.createCommandPool(createInfo);
 }
 
-std::vector<vk::CommandBuffer> CommandManager::CreateCommandBuffers(std::uint32_t count) {
+std::vector<vk::CommandBuffer> CommandManager::CreateCommandBuffers(uint32_t count) {
     auto& ctx = Context::Instance();
 
     vk::CommandBufferAllocateInfo allocInfo;

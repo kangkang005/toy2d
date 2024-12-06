@@ -9,12 +9,12 @@ include(cmake/FindVulkan.cmake)
 include(cmake/FindSDL2.cmake)
 include(cmake/copydll.cmake)
 
-find_program(GLSLC_PROGRAM glslc REQUIRED)
+# find_program(GLSLC_PROGRAM glslc REQUIRED)
 
-message(STATUS "run glslc to compile shaders ...")
-execute_process(COMMAND ${GLSLC_PROGRAM} ${CMAKE_SOURCE_DIR}/shader/shader.vert -o ${CMAKE_SOURCE_DIR}/vert.spv)
-execute_process(COMMAND ${GLSLC_PROGRAM} ${CMAKE_SOURCE_DIR}/shader/shader.frag -o ${CMAKE_SOURCE_DIR}/frag.spv)
-message(STATUS "compile shader OK")
+# message(STATUS "run glslc to compile shaders ...")
+# execute_process(COMMAND ${GLSLC_PROGRAM} ${CMAKE_SOURCE_DIR}/shader/shader.vert -o ${CMAKE_SOURCE_DIR}/vert.spv)
+# execute_process(COMMAND ${GLSLC_PROGRAM} ${CMAKE_SOURCE_DIR}/shader/shader.frag -o ${CMAKE_SOURCE_DIR}/frag.spv)
+# message(STATUS "compile shader OK")
 
 aux_source_directory(src SRC)
 

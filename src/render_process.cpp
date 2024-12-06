@@ -50,9 +50,9 @@ vk::Pipeline RenderProcess::createGraphicsPipeline(const std::vector<char>& vert
     // 0. shader prepare
     vk::ShaderModuleCreateInfo vertexModuleCreateInfo, fragModuleCreateInfo;
     vertexModuleCreateInfo.codeSize = vertexSource.size();
-    vertexModuleCreateInfo.pCode = (std::uint32_t*)vertexSource.data();
+    vertexModuleCreateInfo.pCode = (uint32_t*)vertexSource.data();
     fragModuleCreateInfo.codeSize = fragSource.size();
-    fragModuleCreateInfo.pCode = (std::uint32_t*)fragSource.data();
+    fragModuleCreateInfo.pCode = (uint32_t*)fragSource.data();
 
     auto vertexModule = ctx.device.createShaderModule(vertexModuleCreateInfo);
     auto fragModule = ctx.device.createShaderModule(fragModuleCreateInfo);

@@ -10,7 +10,7 @@ public:
     ~CommandManager();
 
     vk::CommandBuffer CreateOneCommandBuffer();
-    std::vector<vk::CommandBuffer> CreateCommandBuffers(std::uint32_t count);
+    std::vector<vk::CommandBuffer> CreateCommandBuffers(uint32_t count);
     void ResetCmds();
     void FreeCmd(vk::CommandBuffer);
 
