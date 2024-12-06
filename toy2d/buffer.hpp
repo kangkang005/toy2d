@@ -6,23 +6,25 @@ namespace toy2d {
 
 class Buffer final {
 public:
-    vk::Buffer buffer;
-    vk::DeviceMemory memory;
-    size_t size;
+  vk::Buffer buffer;
+  vk::DeviceMemory memory;
+  size_t size;
 
-    Buffer(size_t size, vk::BufferUsageFlags usage, vk::MemoryPropertyFlags property);
-    ~Buffer();
+  Buffer(size_t size, vk::BufferUsageFlags usage,
+         vk::MemoryPropertyFlags property);
+  ~Buffer();
 
 private:
-    struct MemoryInfo final {
-        size_t size;
-        uint32_t index;
-    };
+  struct MemoryInfo final {
+    size_t size;
+    uint32_t index;
+  };
 
-    void createBuffer(size_t size, vk::BufferUsageFlags usage);
-    void allocateMemory(MemoryInfo info);
-    void bindingMem2Buf();
-    MemoryInfo queryMemoryInfo(vk::MemoryPropertyFlags property);
+  void createBuffer(size_t size, vk::BufferUsageFlags usage);
+  void allocateMemory(MemoryInfo info);
+  void bindingMem2Buf();
+  void printMemoryInfo();
+  MemoryInfo queryMemoryInfo(vk::MemoryPropertyFlags property);
 };
 
-}
+} // namespace toy2d

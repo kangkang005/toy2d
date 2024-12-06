@@ -2,4 +2,16 @@ add_executable(sandbox)
 aux_source_directory(./ SANDBOX_SRC)
 target_sources(sandbox PRIVATE ${SANDBOX_SRC})
 target_link_libraries(sandbox PUBLIC toy2d SDL2)
-CopyDLL(sandbox)
+
+add_custom_command(
+    TARGET sandbox
+    COMMAND glslc
+    ARGS
+        ${PROJECT_SOURCE_DIR}/shader/shader.vert -o
+        ${CMAKE_CURRENT_BINARY_DIR}/vert.spv
+    COMMAND glslc
+    ARGS
+        ${PROJECT_SOURCE_DIR}/shader/shader.frag -o
+        ${CMAKE_CURRENT_BINARY_DIR}/frag.spv
+)
+copydll(sandbox)

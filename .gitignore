@@ -1,6 +1,8 @@
 .vscode
 .cache
 cmake-build
+build
 *.json
 *.spv
 compile_flags.txt
+compile_commands.json

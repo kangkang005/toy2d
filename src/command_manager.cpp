@@ -3,9 +3,7 @@
 
 namespace toy2d {
 
-CommandManager::CommandManager() {
-    pool_ = createCommandPool();
-}
+CommandManager::CommandManager() { pool_ = createCommandPool(); }
 
 CommandManager::~CommandManager() {
     auto& ctx = Context::Instance();
@@ -22,18 +20,18 @@ vk::CommandPool CommandManager::createCommandPool() {
     vk::CommandPoolCreateInfo createInfo;
 
     createInfo.setQueueFamilyIndex(ctx.queueInfo.graphicsIndex.value())
-              .setFlags(vk::CommandPoolCreateFlagBits::eResetCommandBuffer);
+        .setFlags(vk::CommandPoolCreateFlagBits::eResetCommandBuffer);
 
     return ctx.device.createCommandPool(createInfo);
 }
 
-std::vector<vk::CommandBuffer> CommandManager::CreateCommandBuffers(std::uint32_t count) {
+std::vector<vk::CommandBuffer>
+CommandManager::CreateCommandBuffers(uint32_t count) {
     auto& ctx = Context::Instance();
 
     vk::CommandBufferAllocateInfo allocInfo;
-    allocInfo.setCommandPool(pool_)
-             .setCommandBufferCount(1)
-             .setLevel(vk::CommandBufferLevel::ePrimary);
+    allocInfo.setCommandPool(pool_).setCommandBufferCount(1).setLevel(
+        vk::CommandBufferLevel::ePrimary);
 
     return ctx.device.allocateCommandBuffers(allocInfo);
 }
@@ -46,4 +44,4 @@ void CommandManager::FreeCmd(vk::CommandBuffer buf) {
     Context::Instance().device.freeCommandBuffers(pool_, buf);
 }
 
-}
+} // namespace toy2d
